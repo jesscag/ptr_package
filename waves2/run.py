@@ -35,4 +35,13 @@ else:
 gather info needed for full run
 std gaussroll off, xdim, ydim, n number samp, L length 
 """
+xdim = input("xdim/ydim in meters:")
+L = input("Length for FFT:")
+n = input('N samp for FFT:')
+std = input('standard dev:')
+spect_choice = input('Spectra to use: ')
 
+##generate waves from chosen spectra, L,  n
+## tile waves to xdim, add to SSH, sense with PTR
+## smooth down data to 1km final size
+## correlate original SSH to final 1km data
