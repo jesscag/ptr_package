@@ -139,7 +139,9 @@ def plot_spect(psi, xmath, ymath):
 
 def compute_ssh(n, L):
     xfft, yfft, xmath, ymath, delkx, delky = compute_freq(n, n, L, L)
+    print('freq made')
     psi, fft_psi = compute_spectrum(n, n, xfft, ymath)
+    print('psi filled')
     zhat = compute_amplitudes(psi, n, n, delky, delkx)  ##zhat giving nan??
     a = np.real(zhat)
     comp = ifft2(zhat)

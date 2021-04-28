@@ -1,6 +1,7 @@
 import sys
 import os
 import datetime
+import numpy as np
 import matplotlib.pyplot as plt
 from waves2.wave_gen.two_d_spect import compute_ssh
 from waves2.gauss import gauss_OBP
@@ -40,8 +41,14 @@ else:
 
 """
 sea surface height data info 
+ssh in data folder 
+check dimensions 
 """
 hycom = ''
+if not len(hycom) == 0:
+    hycom_data = np.loadtxt(os.join(data, hycom))
+    xdim, ydim = hycom_data.shape
+
 
 """
 gather info needed for full run
@@ -50,15 +57,22 @@ std gaussroll off, xdim, ydim, n number samp, L length
 inputs = input('xdim, n, L, std')
 inputs = inputs.split()
 inputs = list(map(int, inputs))
-
+t1 = datetime.datetime.now()
 # generate waves from chosen spectra, L,  n
 ssh_meters = compute_ssh(inputs[1], inputs[2])
 
 # add to HYCOM or altimeter data
 point_target = ptr_run.ptr_run(ssh_meters)
 
-# tile waves to xdim, add to SSH, sense with PTR
+# # tile waves to xdim, add to SSH, sense with PTR
+# # xdim/L
+# ptr_tile = np.tile(point_target, (100,100))
+#
+# # smooth down data to 1km final size
+# x,y = ptr_tile.shape
+# smoothed = np.asarray(gauss_OBP(ptr_tile, x, y, inputs[3], inputs[0])).reshape(inputs[0], inputs[0])
+#
+# # correlate original SSH to final 1km data
+t2 = datetime.datetime.now()
 
-
-# smooth down data to 1km final size
-# correlate original SSH to final 1km data
+print(t2 - t1 )
