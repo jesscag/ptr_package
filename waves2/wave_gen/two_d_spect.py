@@ -3,7 +3,7 @@ from cmath import sqrt
 import time
 from scipy.fft import ifft2, fft2, fftshift
 import matplotlib.pyplot as plt
-from spectra import spectra_ECK_2
+from .spectra import spectra_ECK_2
 from matplotlib import ticker, colors
 
 def compute_freq(Nx, Ny, Lx, Ly):
@@ -137,24 +137,33 @@ def plot_spect(psi, xmath, ymath):
     fig.colorbar(cs)
     plt.show()
 
-if __name__ == "__main__":
-    t1 = time.time()
-    n = 64*50
-    L = 100*50
-    xfft,yfft,xmath,ymath, delkx, delky = compute_freq(n,n,L,L)
-    psi, fft_psi = compute_spectrum(n,n, xfft, ymath)
+def compute_ssh(n, L):
+    xfft, yfft, xmath, ymath, delkx, delky = compute_freq(n, n, L, L)
+    psi, fft_psi = compute_spectrum(n, n, xfft, ymath)
     zhat = compute_amplitudes(psi, n, n, delky, delkx)  ##zhat giving nan??
     a = np.real(zhat)
     comp = ifft2(zhat)
-    print(time.time() - t1)
+    return np.real(comp)
 
-    """plot"""
-    lev = np.linspace(np.min(np.real(comp)), np.max(np.real(comp)))
-    plt.contourf(np.arange(L, step = L/n),np.arange(L, step = L/n), np.real(comp), levels =lev, cmap = 'coolwarm')
-    plt.title('ssh (meters)')
-    plt.xlabel('meters')
-    plt.ylabel('meters')
-    plt.colorbar()
-    plt.show()
-    plot_spect(psi, xmath, ymath)
-    print(time.time() - t1)
+#
+# if __name__ == "__main__":
+#     # t1 = time.time()
+#     # n = 64*50
+#     # L = 100*50
+#     # xfft,yfft,xmath,ymath, delkx, delky = compute_freq(n,n,L,L)
+#     # psi, fft_psi = compute_spectrum(n,n, xfft, ymath)
+#     # zhat = compute_amplitudes(psi, n, n, delky, delkx)  ##zhat giving nan??
+#     # a = np.real(zhat)
+#     # comp = ifft2(zhat)
+#     # print(time.time() - t1)
+#     #
+#     # """plot"""
+#     # lev = np.linspace(np.min(np.real(comp)), np.max(np.real(comp)))
+#     # plt.contourf(np.arange(L, step = L/n),np.arange(L, step = L/n), np.real(comp), levels =lev, cmap = 'coolwarm')
+#     # plt.title('ssh (meters)')
+#     # plt.xlabel('meters')
+#     # plt.ylabel('meters')
+#     # plt.colorbar()
+#     # plt.show()
+#     # plot_spect(psi, xmath, ymath)
+#     # print(time.time() - t1)
