@@ -3,12 +3,11 @@ import Cython.Build
 import numpy as np
 
 import Cython.Compiler.Options
-Cython.Compiler.Options.annotate = True
+
 ##python setup.py build_ext --inplace
 '''
 builds my pyx file to run test .pyx and includes numpy 
 '''
 distutils.core.setup(
-    ext_modules=Cython.Build.cythonize("ptr.pyx"),
+    ext_modules=Cython.Build.cythonize("ptr.pyx", language_level = 3),
     include_dirs=[np.get_include()])
-

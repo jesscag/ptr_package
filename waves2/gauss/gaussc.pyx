@@ -5,6 +5,7 @@ from libc.math cimport sqrt, exp, pi
 cimport cython
 
 
+
 @cython.boundscheck(False)
 @cython.wraparound(False)
 cdef double gauss_1d(double[:,::1] data, double std):
