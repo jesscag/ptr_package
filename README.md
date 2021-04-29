@@ -1,2 +1,3 @@
 # ptr_package
- start to finish cleaned SWOT obs 
+ SWOT observations derrived from SSH and SWH spectra 
+<hr /> 
