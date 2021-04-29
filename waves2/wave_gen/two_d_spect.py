@@ -1,5 +1,5 @@
 """
-Two dimensional wave creation with SWH matching
+Two dimensional wind generated wave creation with SWH matching
 Elfouhaily et al. directional gravity-capillary spectrum
 Unless stated, downwind portrayed only
 """

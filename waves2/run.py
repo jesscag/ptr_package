@@ -1,5 +1,5 @@
 """
-Generate SWH/SSH and compute correlation between observed and original 
+Generate SWH/SSH and compute correlation between observed and original
 """
 import os
 import datetime
@@ -68,7 +68,7 @@ inputs = inputs.split()
 inputs = list(map(int, inputs))
 t1 = datetime.datetime.now()
 # generate waves from chosen spectra, L,  n
-ssh_meters = compute_ssh(inputs[1], inputs[2], final_L=50*50)
+ssh_meters = compute_ssh(inputs[1], inputs[2], final_L=10*10)
 
 # add to HYCOM or altimeter data
 # point_target = ptr_run.ptr_run(ssh_meters)
