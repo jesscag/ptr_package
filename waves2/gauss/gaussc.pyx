@@ -89,6 +89,7 @@ def gauss_OBP(double[:,::1] data, int xdim, int ydim, int std, int final_size):
             ave_final.append(ave)
 
     if xdim & ydim > 1:
+        print('starting gauss '+str(in_box))
         for i in range(0, xdim, in_box):
             for j in range(0, ydim, in_box):
                 corners = np.asarray([i-box_std, i+box_std, j-box_std, j+box_std], dtype = 'double')

@@ -43,18 +43,25 @@ else:
 sea surface height data info 
 ssh in data folder 
 check dimensions 
+is wave from spect created? grab it instead of making 
+it 
 """
 hycom = ''
+wave_data = ''
 if not len(hycom) == 0:
     hycom_data = np.loadtxt(os.join(data, hycom))
     xdim, ydim = hycom_data.shape
+    # 1km to 5km square data needed??
+if not len(wave_data) == 0:
+    wave_data = np.loadtxt(os.join(data, wave_data))
+    xdim, ydim = wave_data.shape
 
 
 """
 gather info needed for full run
 std gaussroll off, xdim, ydim, n number samp, L length 
 """
-inputs = input('xdim, n, L, std')
+inputs = input('Final Length (meters), Nsamp, Length (meters), standard deviation (meters)' )
 inputs = inputs.split()
 inputs = list(map(int, inputs))
 t1 = datetime.datetime.now()
@@ -62,17 +69,20 @@ t1 = datetime.datetime.now()
 ssh_meters = compute_ssh(inputs[1], inputs[2])
 
 # add to HYCOM or altimeter data
-point_target = ptr_run.ptr_run(ssh_meters)
-
-# # tile waves to xdim, add to SSH, sense with PTR
-# # xdim/L
-# ptr_tile = np.tile(point_target, (100,100))
+# point_target = ptr_run.ptr_run(ssh_meters)
+# del ssh_meters
+#
+# # # tile waves to xdim, add to SSH, sense with PTR
+# # # xdim/L
+# ptr_tile = np.tile(point_target, (10, 10))
+# del point_target
 #
 # # smooth down data to 1km final size
-# x,y = ptr_tile.shape
+# x, y = ptr_tile.shape
 # smoothed = np.asarray(gauss_OBP(ptr_tile, x, y, inputs[3], inputs[0])).reshape(inputs[0], inputs[0])
+# #
+# # # correlate original SSH to final 1km data
 #
-# # correlate original SSH to final 1km data
-t2 = datetime.datetime.now()
-
-print(t2 - t1 )
+#
+# t2 = datetime.datetime.now()
+# print(t2 - t1)

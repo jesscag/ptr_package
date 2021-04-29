@@ -143,6 +143,7 @@ def compute_ssh(n, L):
     psi, fft_psi = compute_spectrum(n, n, xfft, ymath)
     print('psi filled')
     zhat = compute_amplitudes(psi, n, n, delky, delkx)  ##zhat giving nan??
+    print('amplitudes created')
     a = np.real(zhat)
     comp = ifft2(zhat)
     return np.real(comp)
