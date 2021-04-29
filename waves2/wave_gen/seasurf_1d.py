@@ -1,8 +1,13 @@
+"""
+One dimensional SSH creation with SWH matching
+Pierson-Mowskowitz spectrum
+"""
+
 import numpy as np
-from spectra import spectra_PM, spectra_ECKV
+from .spectra import spectra_PM
 from cmath import sqrt
 from scipy.fft import ifft, fft
-import matplotlib.pyplot as plt
+
 
 
 def compute_amplitudes(L, nsamp):
@@ -64,30 +69,7 @@ def checks_on_amps(ifft_ssh_both, nsamp):
     return zavg, H13, max_imag
 
 
-
-# L = 100
-# N = 1024
-# z_hat, k, two_sided, SK, delta_k = compute_amplitudes(L, N)
-# for_plot = np.arange(0, L, (L / N))
-# zcomp = ifft(z_hat)
-# np.savetxt('real_50k_wave', np.real(zcomp))
-# plt.plot(for_plot, np.real(zcomp))
-# plt.xlabel('Distance (meters)')
-# plt.ylabel('SSH Elevation (meters)')
-# plt.title('Sea Surface Height')
-# plt.show()
-#
-# # plt.plot(fft(zcomp),  'o', color = 'b')
-# # plt.plot(z_hat, 'r')
-# # plt.show()
-# p1s = compute_periodogram(np.real(zcomp), N, delta_k)
-# plt.loglog(SK,'b', label = 'Pierson-Moskowitz Spectra')
-# plt.loglog(p1s,'r', label = 'Periodogram for surface')
-# plt.ylim(SK.min(), p1s.max())
-# plt.title('Periodogram')
-# plt.xlabel('Spatial Frequency k (rad/m)')
-# plt.ylabel('Variance Density ($m^2$/(rad/m))')
-# plt.legend()
-# plt.show()
-#
-# zavg, h13, max_img = checks_on_amps(zcomp, N)
+def compute_ssh(L, N):
+    z_hat, k, two_sided, SK, delta_k = compute_amplitudes(L, N)
+    zcomp = ifft(z_hat)
+    return np.real(zcomp)

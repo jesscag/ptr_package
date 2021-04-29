@@ -1,3 +1,6 @@
+"""
+Spectra used to create realistic waves in 1 or 2d
+"""
 import numpy as np
 from cmath import sqrt
 import matplotlib.pyplot as plt
