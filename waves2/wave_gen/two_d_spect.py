@@ -160,13 +160,13 @@ def compute_ssh(n, L, final_L):
     ssh = []
     for i in range(final_L):
         zhat = compute_amplitudes(psi, n, n, delky, delkx)  ##zhat giving nan??
-        print('amplitudes created')
+        print('amplitudes created ' + str(i) + '/' + str(final_L))
         a = np.real(zhat)
         comp = ifft2(zhat)
         ssh.append(np.real(comp))
+    ssh = np.concatenate([ssh]).reshape(int(L*np.sqrt(final_L)), int(L*np.sqrt(final_L)))
     return ssh
 
-#
 # if __name__ == "__main__":
 #     # t1 = time.time()
 #     # n = 64*50
