@@ -67,7 +67,7 @@ inputs = inputs.split()
 inputs = list(map(int, inputs))
 t1 = datetime.datetime.now()
 # generate waves from chosen spectra, L,  n
-ssh_meters = compute_ssh(inputs[1], inputs[2], final_L=inputs[0])
+ssh_meters = compute_ssh(inputs[1], inputs[2], final_L=inputs[0])  # final_l 50*50 for sqrt
 np.savetxt('/Users/caggiano/SWOT_GIT/waves/ptr_package/data/amplitudes_1000', ssh_meters)
 print(datetime.datetime.now() - t1)
 
